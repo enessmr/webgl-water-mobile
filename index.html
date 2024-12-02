@@ -43,6 +43,15 @@ Released under the MIT license
   'opsz' 24
 }
 </style>
+  <style>
+    #settings-dialog-open {
+      position: fixed;
+      bottom: 6px;
+      left: 128px;
+      z-index: 1;
+      margin: bottom;
+    }
+   </style>
   <title>WebGL Water</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <script src="OES_texture_float_linear-polyfill.js"></script>
@@ -94,6 +103,9 @@ Released under the MIT license
     <p class="md-typescale-body-small"><small>Tile texture from <a href="http://www.flickr.com/photos/zooboing/3682834083/">zooboing</a> on Flickr</small></p>
     <p class="md-typescale-body-small"><small>psst, works without these keys on some tablets those include a keyboard</small></p>
   </div>
+  <md-fab aria-label="Settings" class="settings-dialog-open">
+    <md-icon slot="icon">settings</md-icon>
+  </md-fab>
   <img id="tiles" src="tiles.jpg">
   <img id="xneg" src="xneg.jpg">
   <img id="xpos" src="xpos.jpg">
