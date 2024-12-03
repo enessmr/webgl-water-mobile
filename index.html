@@ -155,13 +155,18 @@ Released under the MIT license
   <img id="zpos" src="zpos.jpg">
   <md-fab variant="auto" aria-label="Settings" class="settings-dialog-open" id="set-light-direction" onclick="draw()">
     <md-icon slot="icon">sunny</md-icon>
-  </md-fab>
-  <script src="lightgl.js" defer></script>
-  <md-fab variant="auto" aria-label="toggle time" class="time-toggle" onclick="paused">
+</md-fab>
+
+<script src="lightgl.js" defer></script>
+
+<md-fab variant="auto" aria-label="toggle time" class="time-toggle" onclick="paused = !paused;">
     <md-icon slot="icon">schedule</md-icon>
-  </md-fab>
-  <md-fab variant="auto" aria-label="Gravity" class="gravity-toggle" onclick="!useSpherePhysics">
+</md-fab>
+
+<md-fab variant="auto" aria-label="Gravity" class="gravity-toggle" onclick="useSpherePhysics = !useSpherePhysics;">
     <md-icon slot="icon">specific_gravity</md-icon>
-  </md-fab>
-  <script src="main.js" defer></script>
+</md-fab>
+
+<script src="main.js" defer></script>
+
   <body></html>
