@@ -34,6 +34,8 @@ Released under the MIT license
         }
         </script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=settings" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=specific_gravity" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=sunny" />
   <style>
 .material-symbols-outlined {
   font-variation-settings:
@@ -62,6 +64,37 @@ Released under the MIT license
 
 .settings-dialog-open:hover {
     background-color: #3700b3;
+}
+    
+    .set-light-direction {
+    position: fixed;
+    top: 20px;
+    left: 5px;
+    z-index: 25;
+    background-color: #6200ee;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+        .gravity-toggle {
+    position: fixed;
+    top: 40px;
+    left: 5px;
+    z-index: 25;
+    background-color: #6200ee;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
    </style>
@@ -124,5 +157,11 @@ Released under the MIT license
   <img id="zpos" src="zpos.jpg">
   <md-fab variant="auto" aria-label="Settings" class="settings-dialog-open">
     <md-icon slot="icon">settings</md-icon>
+  </md-fab>
+  <md-fab variant="auto" aria-label="light direction" class="set-light-direction">
+    <md-icon slot="icon">sunny</md-icon>
+  </md-fab>
+  <md-fab variant="auto" aria-label="Gravity" class="gravity-toggle">
+    <md-icon slot="icon">specific_gravity</md-icon>
   </md-fab>
 </body></html>
