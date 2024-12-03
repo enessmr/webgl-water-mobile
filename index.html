@@ -64,7 +64,7 @@ Released under the MIT license
     background-color: #3700b3;
 }
     
-    .set-light-direction {
+    .time-toggle {
     position: fixed;
     top: 20px;
     left: 5px;
@@ -81,7 +81,7 @@ Released under the MIT license
 }
         .gravity-toggle {
     position: fixed;
-    top: 70px;
+    top: 160px;
     left: 5px;
     z-index: 25;
     background-color: #6200ee;
@@ -145,7 +145,7 @@ Released under the MIT license
     </ul>
     <p class="md-typescale-body-small"><small>* requires the OES_texture_float extension<br>** requires the OES_standard_derivatives extension</small></p>
     <p class="md-typescale-body-small"><small>Tile texture from <a href="http://www.flickr.com/photos/zooboing/3682834083/">zooboing</a> on Flickr</small></p>
-    <p class="md-typescale-body-small"><small>psst, works without these keys on some tablets those include a keyboard</small></p>
+    <p class="md-typescale-body-small"><small>psst, works without these fabs and buttons on some tablets those include a keyboard</small></p>
   </div>
   <img id="tiles" src="tiles.jpg">
   <img id="xneg" src="xneg.jpg">
@@ -153,13 +153,15 @@ Released under the MIT license
   <img id="ypos" src="ypos.jpg">
   <img id="zneg" src="zneg.jpg">
   <img id="zpos" src="zpos.jpg">
-  <md-fab variant="auto" aria-label="Settings" class="settings-dialog-open">
-    <md-icon slot="icon">settings</md-icon>
-  </md-fab>
-  <md-fab variant="auto" aria-label="light direction" class="set-light-direction">
+  <md-fab variant="auto" aria-label="Settings" class="settings-dialog-open" id="set-light-direction" onclick="draw()">
     <md-icon slot="icon">sunny</md-icon>
   </md-fab>
-  <md-fab variant="auto" aria-label="Gravity" class="gravity-toggle">
+  <script src="lightgl.js" defer></script>
+  <md-fab variant="auto" aria-label="toggle time" class="time-toggle" onclick="paused">
+    <md-icon slot="icon">schedule</md-icon>
+  </md-fab>
+  <md-fab variant="auto" aria-label="Gravity" class="gravity-toggle" onclick="!useSpherePhysics">
     <md-icon slot="icon">specific_gravity</md-icon>
   </md-fab>
-</body></html>
+  <script src="main.js" defer></script>
+  <body></html>
