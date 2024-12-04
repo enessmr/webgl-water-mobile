@@ -103,6 +103,18 @@ Released under the MIT license
 }
 
    </style>
+  <script>
+    import { argbFromHex, themeFromSourceColor, applyTheme } from '@material/material-color-utilities';
+
+// Example wallpaper color (replace this with actual retrieved color)
+const wallpaperColorHex = '#6200EE';
+
+// Generate theme
+const theme = themeFromSourceColor(argbFromHex(wallpaperColorHex));
+
+// Apply theme
+applyTheme(theme, { target: document.body });
+  </script>
   <title>WebGL Water</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <script src="OES_texture_float_linear-polyfill.js"></script>
