@@ -2,6 +2,6 @@
 
 http://madebyevan.com/webgl-water/
 
-# WebGL Water Demo -- For No Keyboard FCs/Phones
+# WebGL Water Demo -- For No Keyboard PCs/Phones
 
 https://enessmr.github.io/webgl-water-mobile/
