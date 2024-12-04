@@ -181,6 +181,7 @@ applyTheme(theme, { target: document.body });
   <img id="zpos" src="zpos.jpg">
   <md-fab variant="auto" aria-label="Settings" class="settings-dialog-open" id="set-light-direction" onclick="renderer.lightDir = GL.Vector.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180); 
             if (paused) renderer.updateCaustics(water);">
+    Light Dir.
     <md-icon slot="icon">sunny</md-icon>
 </md-fab>
 
@@ -188,10 +189,12 @@ applyTheme(theme, { target: document.body });
 
 <md-fab variant="auto" aria-label="toggle time" class="time-toggle" onclick="paused = !paused;">
     <md-icon slot="icon">schedule</md-icon>
+    T. Ti.
 </md-fab>
 
 <md-fab variant="auto" aria-label="Gravity" class="gravity-toggle" onclick="useSpherePhysics = !useSpherePhysics;">
     <md-icon slot="icon">specific_gravity</md-icon>
+    Grav.
 </md-fab>
 
 <script src="main.js" defer></script>
