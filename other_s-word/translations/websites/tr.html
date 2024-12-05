@@ -1,0 +1,204 @@
+<!--
+WebGL Water
+http://madebyevan.com/webgl-water/
+
+Copyright 2011 Evan Wallace
+Released under the MIT license
+-->
+
+<!DOCTYPE html>
+<html lang=en><head>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <script type="importmap">
+        {
+            "imports": {
+            "@material/web/": "https://esm.run/@material/web/"
+            }
+        }
+        </script>
+        <script type="module">
+            import '@material/web/all.js';
+            import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+            document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+        </script>
+
+        <script type="module">
+        import '@material/web/all.js';
+        import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+        if (typescaleStyles && typescaleStyles.styleSheet) {
+            document.adoptedStyleSheets = [typescaleStyles.styleSheet];
+        } else {
+            console.error("Failed to load typography styles");
+        }
+        </script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,-10..0,25..151,100..1000,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,slnt,wdth,wght,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,-10..0,25..151,100..1000,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+</style>
+  <style>
+    .settings-dialog-open {
+    position: fixed;
+    bottom: 5px;
+    right: 360px;
+    z-index: 25;
+    background-color: #6200ee;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.settings-dialog-open:hover {
+    background-color: #3700b3;
+}
+    
+    .time-toggle {
+    position: fixed;
+    top: 20px;
+    left: 5px;
+    z-index: 25;
+    background-color: #6200ee;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+        .gravity-toggle {
+    position: fixed;
+    top: 160px;
+    left: 5px;
+    z-index: 25;
+    background-color: #6200ee;
+    color: white;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+   </style>
+  <script>
+    import { argbFromHex, themeFromSourceColor, applyTheme } from '@material/material-color-utilities';
+
+// Example wallpaper color (replace this with actual retrieved color)
+const wallpaperColorHex = '#6200EE';
+
+// Generate theme
+const theme = themeFromSourceColor(argbFromHex(wallpaperColorHex));
+
+// Apply theme
+applyTheme(theme, { target: document.body });
+  </script>
+  <title>WebGL Water</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <script src="OES_texture_float_linear-polyfill.js"></script>
+  <script src="lightgl.js"></script>
+  <script src="cubemap.js"></script>
+  <script src="renderer.js"></script>
+  <script src="water.js"></script>
+  <script src="main.js"></script>
+  <style type="text/css">
+    body { font: 13px/140% Arial, sans-serif; background: black; color: white; overflow: hidden; }
+    a { color: inherit; cursor: pointer; }
+    img { display: none; }
+    ul { padding: 0 0 0 20px; }
+    h1 { font: bold italic 30px/30px Georgia; text-align: center; }
+    h2 { font: bold italic 17px/17px Georgia; padding-top: 10px; }
+    small { display: block; font-size: 11px; line-height: 15px; }
+    canvas { position: absolute; top: 0; left: 0; }
+    #help { position: absolute; top: 0; right: 0; bottom: 0; width: 280px; padding-right: 20px; overflow: auto; }
+    #loading { position: absolute; left: 0; top: 50%; right: 300px; text-align: center; margin-top: -8px; }
+    @media (max-width: 600px) {
+      small { font-size: 8px; line-height: 10px; }
+      #help { width: 100px; font-size: 10px; line-height: 12px; }
+    }
+  </style>
+          <link
+            rel="icon"
+            type="image/png"
+            href="evan.png"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        evan.png
+</head><body>
+  <div id="loading">Yükleniyor...</div>
+  <div id="help">
+    <h1>WebGL Su</h1>
+    <p class="md-typescale-body-small"><a href="http://madebyevan.com/">Evan Wallace</a> tarafından yapılmış ve mobil/klavyesiz PC'lerde çalışması için <a href="https://github.com/enessmr">enessmr</a> tarafından değiştirilmiştir</p>
+    <p class="md-typescale-body-small">Bu demo, iyi bir grafik kartı ve güncel sürücüler gerektirir. Demoyu çalıştıramıyorsanız, yine de <a href="http://youtube.com/watch?v=R0O_9bp3EKQ">YouTube'da izleyebilirsiniz</a>.</p>
+
+<p class="md-typescale-body-small">Lütfen bunu çevirmeyin! Aksi takdirde, simgeler bozulur. Lütfen <a href="other_s-word/translations/translations.html">Çeviriler sayfasına</a> gidin.</p>
+<h2>Etkileşimler:</h2>
+<ul>
+<li class="md-typescale-body-small">Dalgalar oluşturmak için suyun üzerine çizin</li>
+<li class="md-typescale-body-small">Kamerayı döndürmek için arka planı sürükleyin</li>
+<li class="md-typescale-body-small">Duraklatmak ve duraklatmayı kaldırmak için BOŞLUK ÇUBUĞU'na basın</li>
+<li class="md-typescale-body-small">Etrafında hareket ettirmek için küreyi sürükleyin</li>
+<li class="md-typescale-body-small">Işık yönünü ayarlamak için L tuşuna basın</li>
+<li class="md-typescale-body-small">Yerçekimini değiştirmek için G tuşuna basın</li>
+</ul>
+<h2>Özellikler:</h2>
+<ul>
+<li class="md-typescale-body-small">Işın izli yansımalar ve kırılmalar</li>
+<li class="md-typescale-body-small">Analitik ortam tıkanıklığı</li>
+<li class="md-typescale-body-small">Yükseklik alanı su simülasyonu *</li>
+<li class="md-typescale-body-small">Yumuşak gölgeler</li>
+<li class="md-typescale-body-small">Kostikler (ayrıntılar için <a href="https://medium.com/@evanwallace/rendering-realtime-caustics-in-webgl-2a99a29a0b2c">buraya</a> bakın) **</li>
+</ul>
+<p class="md-typescale-body-small"><small>* şunu gerektirir OES_texture_float uzantısı<br>** OES_standard_derivatives uzantısını gerektirir</small></p>
+<p class="md-typescale-body-small"><small>Flickr'daki <a href="http://www.flickr.com/photos/zooboing/3682834083/">zooboing</a>'den fayans dokusu</small></p>
+<p class="md-typescale-body-small"><small>psst, klavye içeren bazı tabletlerde bu fabrikalar ve düğmeler olmadan çalışır</small></p>
+  </div>
+  <img id="tiles" src="tiles.jpg">
+  <img id="xneg" src="xneg.jpg">
+  <img id="xpos" src="xpos.jpg">
+  <img id="ypos" src="ypos.jpg">
+  <img id="zneg" src="zneg.jpg">
+  <img id="zpos" src="zpos.jpg">
+  <md-fab variant="primary" aria-label="Settings" class="settings-dialog-open" id="set-light-direction" onclick="renderer.lightDir = GL.Vector.fromAngles((90 - angleY) * Math.PI / 180, -angleX * Math.PI / 180); 
+            if (paused) renderer.updateCaustics(water);">
+    Light Dir.
+    <md-icon slot="icon">sunny</md-icon>
+</md-fab>
+
+<script src="lightgl.js" defer></script>
+
+<md-fab variant="primary" aria-label="toggle time" class="time-toggle" onclick="paused = !paused;">
+    <md-icon slot="icon">schedule</md-icon>
+    T. Ti.
+</md-fab>
+
+<md-fab variant="primary" aria-label="Gravity" class="gravity-toggle" onclick="useSpherePhysics = !useSpherePhysics;">
+    <md-icon slot="icon">specific_gravity</md-icon>
+    Grav.
+</md-fab>
+
+<script src="main.js" defer></script>
+
+  <body></html>
